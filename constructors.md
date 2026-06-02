@@ -46,7 +46,7 @@ class Player {
   std::string name;
   int score;
 
-  Player(std::string name_val, int score_val): name(name_val), score(score_val) {}
+  Player(std::string n, int s): name(n), score(s) {}
 
   Player() = default; // forces the default constructor to be generated.
 };
@@ -62,7 +62,7 @@ class Player {
   std::string name;
   int score;
 
-  Player(std::string name_val = "Unknown", int score_val = 0): name(name_val), score(score_val) {}
+  Player(std::string n = "Unknown", int s = 0): name(n), score(s) {}
 };
 
 // both of these statements are valid
@@ -78,4 +78,44 @@ the compiler will interpret it as a function declaration.
 ```cpp
 Player p(); // ❌ compiler thinks this is a declaration of a function named p that returns a Player object.
 Player p; // ✅
+```
+
+### Parameterized constructor
+
+#### Member initialization
+
+There are two types of member initialization with parameterized constructors in C++.
+
+1. Member initialization list
+
+- Runs before the constructor body executes.
+- Directly invokes the appropriate constructor.
+- One-step process, avoids temporaries - faster.
+- Mandatory for: const members, references, and types without default constructors.
+
+```cpp
+class Point {
+  int x;
+  int y;
+
+  Point(int xVal, int yVal): x(xVal), y(yVal) {}
+}
+```
+
+2. Assignment in the constructor body
+
+- Runs inside the constructor body.
+- Default-constructs the member first, then overwrites it via an assignment operator.
+- Slower for user-defined types (two-step process).
+
+```cpp
+class Point {
+  int x;
+  int y;
+
+  Point(int xVal, int yVal) {
+    x = xVal;
+    y = yVal;
+  }
+}
 ```
