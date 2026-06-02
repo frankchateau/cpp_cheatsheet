@@ -90,7 +90,7 @@ There are two types of member initialization with parameterized constructors in 
 
 - Runs before the constructor body executes.
 - Directly invokes the appropriate constructor.
-- One-step process, avoids temporaries - faster.
+- One-step process, avoids temporaries, faster.
 - Mandatory for: const members, references, and types without default constructors.
 
 ```cpp
@@ -118,4 +118,49 @@ class Point {
     y = yVal;
   }
 }
+```
+
+#### Constructor overloading
+
+You can define multiple parameterized constructors in a single class as long as they have different parameter counts and/or data types.
+
+```cpp
+class Point {
+    int x, y;
+public:
+    Point(int val) : x(val), y(val) {}      // Takes one argument
+    Point(int xVal, int yVal) : x(xVal), y(yVal) {} // Takes two arguments
+};
+```
+
+#### Default Arguments
+
+You can assign default values to constructor parameters. If an argument is missing during object creation, the default value is applied. A constructor where all parameters have default values can also function as a default constructor.
+
+```cpp
+class Color {
+    int r, g, b;
+public:
+    // Functions as both a parameterized and a default constructor
+    Color(int red = 0, int green = 0, int blue = 0) : r(red), g(green), b(blue) {}
+};
+```
+
+#### Inheritance Context
+
+When working with derived classes, the derived class's constructor must explicitly forward the necessary values to the base class's parameterized constructor using the initializer list syntax.
+
+```cpp
+class Base {
+    int data;
+public:
+    Base(int d) : data(d) {}
+};
+
+class Derived : public Base {
+    int childData;
+public:
+    // Forwarding argument 'd' to Base constructor
+    Derived(int d, int cd) : Base(d), childData(cd) {}
+};
 ```
