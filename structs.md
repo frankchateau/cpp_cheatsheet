@@ -32,7 +32,7 @@ struct Enemy {
 };
 
 Enemy e1; // damage = 10, speed = 5
-Enemy e2{20}; // damage = 10, speed = 5
+Enemy e2{20}; // damage = 20, speed = 5
 ```
 
 #### 4. Zero-Initialization / Empty Braces (C++11)
