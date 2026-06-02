@@ -41,7 +41,7 @@ Enemy e2{20}; // damage = 20, speed = 5
 Player p5{}; // name = "", score = 0, health = 0.0
 ```
 
-#### 5. Traditional Constructors (Class-like Initialization)
+#### 5. Traditional Constructors (Class-like Initialization) (C++98)
 
 ```cpp
 struct Point {
